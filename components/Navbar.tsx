@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { logoFont } from "@/app/fonts/logoFont";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -22,15 +23,26 @@ function NavBar() {
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 uppercase font-tech text-sm tracking-[0.2em]">
 
           {/* LOGO */}
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-14 bg-ers-yellow clip-corner flex items-center justify-center text-black font-bold text-lg">
-              ERS
+          <Link href="/" className="flex items-center gap-3">
+            <div className="flex flex-col leading-none">
+              <div
+                className={`
+                  text-white
+                  font-semibold
+                  text-3xl
+                  md:text-4xl
+                  ${logoFont.className}
+                `}
+              >
+                ERS
+              </div>
+
+              <span className="text-ers-yellow/80 font-body text-[10px] md:text-xs mt-1 tracking-widest">
+                Electronics & Robotics Society
+              </span>
             </div>
-            <span className="text-ers-yellow/80 font-body text-xs hidden md:block">
-              Electronics & Robotics Society
-            </span>
-            {/* <img src="/Logo1.png" alt="ERS Logo" className="h-10  md:h-12 "/> */}
-          </div>
+          </Link>
+
 
           {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-6">
