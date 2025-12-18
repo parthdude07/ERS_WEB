@@ -75,9 +75,28 @@ export default async function Home() {
         <div className="relative mx-auto grid min-h-[80vh] max-w-6xl grid-cols-1 md:grid-cols-2 gap-8 px-6 py-20 items-center">
 
           {/* LEFT: ROBOT */}
-          <div className="relative h-[60vh] md:h-[70vh] w-full">
-            <HeroRobot />
+          <div className="relative flex items-center justify-center overflow-visible">
+
+            {/* Glow layer */}
+            <div
+              className="
+                absolute
+                inset-0
+                flex items-center justify-center
+                pointer-events-none
+                z-0
+              "
+            >
+              <div className="w-90 h-70 bg-ers-yellow/20 rounded-full blur-3xl -translate-x-20" />
+              </div>
+
+            {/* Canvas */}
+            <div className="relative h-[60vh] md:h-[70vh] w-full z-10">
+              <HeroRobot />
+            </div>
+
           </div>
+
 
           {/* RIGHT: TEXT */}
           <div className="flex flex-col justify-center text-left md:pl-12">
