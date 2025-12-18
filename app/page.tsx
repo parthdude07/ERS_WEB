@@ -39,14 +39,12 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-ers-black text-white selection:bg-ers-yellow selection:text-black font-body">
 
-      
-
       {/* ================= HERO SECTION ================= */}
       <section className="relative overflow-hidden border-b border-ers-yellow/30">
         <div className="absolute inset-0 bg-gradient-to-br from-ers-dark via-black to-black opacity-90" />
         <div className="absolute inset-x-0 top-0 h-24 barcode-stripe opacity-80" />
 
-        <div className="relative mx-auto grid min-h-[80vh] max-w-6xl grid-cols-1 md:grid-cols-2 gap-8 px-6 py-20 items-center">
+        <div className="relative w-full grid min-h-[80vh] grid-cols-1 md:grid-cols-2 gap-8 px-6 py-20 items-center">
 
           {/* LEFT: ROBOT */}
           <div className="relative flex items-center justify-center overflow-visible">
@@ -62,7 +60,7 @@ export default async function Home() {
               "
             >
               <div className="w-90 h-70 bg-ers-yellow/20 rounded-full blur-3xl -translate-x-20" />
-              </div>
+            </div>
 
             {/* Canvas */}
             <div className="relative h-[60vh] md:h-[70vh] w-full z-10">
@@ -110,7 +108,7 @@ export default async function Home() {
       {/* ================= GALLERY SECTION ================= */}
       {galleryImages.length > 0 && (
         <section className="py-24 px-4 md:px-8 relative bg-ers-dark/50">
-          <div className="flex justify-between items-end mb-12 max-w-6xl mx-auto">
+          <div className="flex justify-between items-end mb-12 w-full">
             <div>
               <h2 className="text-4xl font-tech tracking-widest mb-2">
                 VISUAL_LOGS
@@ -126,7 +124,7 @@ export default async function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 gap-2 md:gap-4 h-[600px] max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 gap-2 md:gap-4 h-[600px] w-full">
             {galleryImages.map((img: any, index: number) => {
               let spanClasses = "";
               if (index === 0) spanClasses = "col-span-2 row-span-2";

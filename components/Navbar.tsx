@@ -20,7 +20,7 @@ function NavBar() {
   return (
     <header className="sticky top-0 z-50">
       <div className="bg-black border-b-4 border-ers-yellow shadow-[0_8px_0_0_#f4c430]">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 uppercase font-tech text-sm tracking-[0.2em]">
+        <nav className="flex w-full items-center justify-between px-6 py-4 uppercase font-tech text-sm tracking-[0.2em]">
 
           {/* LOGO */}
           <Link href="/" className="flex items-center gap-3">
