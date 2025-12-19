@@ -1,40 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
-import { client, urlFor } from "@/sanity/lib/sanity";
-import { ArrowUpRight } from "lucide-react";
 import HeroRobot from "@/components/HeroRobot";
-
-/* -------------------------------
-   Utility functions
---------------------------------*/
-
-// Shuffle array to randomize photos
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
-// Fetch gallery images
-async function getRandomGalleryImages() {
-  const query = `*[_type == "gallery" && defined(images)].images[]`;
-
-  const images = await client.fetch(query, {}, {
-    next: { revalidate: 10 },
-  });
-
-  return shuffleArray(images || []).slice(0, 12);
-}
 
 /* -------------------------------
    Page Component (Server)
 --------------------------------*/
 
 export default async function Home() {
-  const galleryImages = await getRandomGalleryImages();
 
   return (
     <main className="min-h-screen bg-ers-black text-white selection:bg-ers-yellow selection:text-black font-body">
@@ -42,7 +13,7 @@ export default async function Home() {
       {/* ================= HERO SECTION ================= */}
       <section className="relative overflow-hidden border-b border-ers-yellow/30">
         <div className="absolute inset-0 bg-gradient-to-br from-ers-dark via-black to-black opacity-90" />
-        <div className="absolute inset-x-0 top-0 h-24 barcode-stripe opacity-80" />
+        {/* <div className="absolute inset-x-0 top-0 h-24 barcode-stripe opacity-80" /> */}
 
         <div className="relative w-full grid min-h-[80vh] grid-cols-1 md:grid-cols-2 gap-8 px-6 py-20 items-center">
 
@@ -98,68 +69,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-
-        {/* Decorative Stripe */}
-        <div className="relative h-16 bg-black border-t border-ers-yellow/30">
-          <div className="w-full h-full opacity-30 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,#ffcc00_2px,#ffcc00_4px)]" />
-        </div>
       </section>
-
-      {/* ================= GALLERY SECTION ================= */}
-      {galleryImages.length > 0 && (
-        <section className="py-24 px-4 md:px-8 relative bg-ers-dark/50">
-          <div className="flex justify-between items-end mb-12 w-full">
-            <div>
-              <h2 className="text-4xl font-tech tracking-widest mb-2">
-                VISUAL_LOGS
-              </h2>
-              <div className="h-1 w-20 bg-ers-yellow skew-x-[-20deg]" />
-            </div>
-
-            <Link
-              href="/gallery"
-              className="hidden md:flex items-center gap-2 text-ers-yellow font-tech tracking-widest text-sm hover:underline"
-            >
-              FULL_DATABASE <ArrowUpRight size={18} />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 gap-2 md:gap-4 h-[600px] w-full">
-            {galleryImages.map((img: any, index: number) => {
-              let spanClasses = "";
-              if (index === 0) spanClasses = "col-span-2 row-span-2";
-              else if (index === 5) spanClasses = "md:col-span-2";
-
-              return (
-                <div
-                  key={img._key || index}
-                  className={`relative group overflow-hidden bg-black border border-white/10 hover:border-ers-yellow transition-all duration-500 ${spanClasses}`}
-                >
-                  <Image
-                    src={urlFor(img).width(600).height(600).url()}
-                    alt="Club gallery photo"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 25vw"
-                    className="object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 grayscale group-hover:grayscale-0"
-                  />
-
-                  <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-ers-yellow opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-ers-yellow opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-8 text-center md:hidden">
-            <Link
-              href="/gallery"
-              className="inline-flex items-center gap-2 text-ers-yellow font-tech"
-            >
-              VIEW FULL GALLERY <ArrowUpRight size={18} />
-            </Link>
-          </div>
-        </section>
-      )}
     </main>
   );
 }
