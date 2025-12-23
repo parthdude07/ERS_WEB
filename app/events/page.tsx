@@ -29,17 +29,17 @@ async function getEvents() {
 
 export default async function EventsPage() {
   const allEvents: Event[] = await getEvents();
-  
+
   // 3. Logic to split Upcoming vs Past
   const now = new Date();
-  
+
   const upcomingEvents = allEvents.filter(event => new Date(event.date) >= now);
   // Reverse past events so the most recent "past" event is at the top of its section
   const pastEvents = allEvents.filter(event => new Date(event.date) < now);
 
   return (
     <div className="min-h-screen bg-ers-black text-white p-8 md:p-24 font-body">
-      
+
       {/* Header */}
       <div className="flex flex-col items-center mb-16 text-center">
         <h1 className="text-5xl md:text-7xl font-tech text-transparent bg-clip-text bg-gradient-to-r from-ers-yellow to-white mb-4">
@@ -109,15 +109,23 @@ function EventCard({
   return (
     <div
       className={`
-        group relative flex flex-col bg-ers-dark overflow-hidden
+        group relative flex flex-col bg-black overflow-hidden
         border transition-all duration-300
-        ${
-          isUpcoming
-            ? "border-ers-yellow/40 hover:border-ers-yellow shadow-[0_0_40px_rgba(244,196,48,0.15)]"
-            : "border-white/10 hover:border-white/30"
+        ${isUpcoming
+          ? "border-ers-yellow/40 hover:border-ers-yellow hover:shadow-[0_0_20px_rgba(244,196,48,0.15)] hover:-translate-y-2"
+          : "border-white/10 hover:border-white/30 hover:-translate-y-1"
         }
       `}
     >
+      {/* GLOW EFFECT BEHIND */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b from-ers-yellow/5 to-transparent pointer-events-none z-0" />
+
+      {/* TOP BAR */}
+      <div className={`
+        absolute top-0 left-0 right-0 h-1 z-20 shadow-[0_0_10px_#f4c430]
+        ${isUpcoming ? "bg-ers-yellow" : "bg-gray-600"}
+      `} />
+
       {/* IMAGE */}
       <div className="relative h-64 w-full overflow-hidden">
         {event.coverImage ? (
@@ -126,8 +134,8 @@ function EventCard({
             alt={event.title}
             fill
             className={`
-              object-cover transition-transform duration-700
-              ${isUpcoming ? "group-hover:scale-110" : ""}
+              object-cover transition-transform duration-700 ease-out
+              ${isUpcoming ? "group-hover:scale-110" : "opacity-80"}
             `}
           />
         ) : (
@@ -138,15 +146,17 @@ function EventCard({
           </div>
         )}
 
+        {/* SCANLINE OVERLAY */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 bg-[length:100%_2px,3px_100%] pointer-events-none opacity-40 ml-[1px]" />
+
         {/* DATE BADGE */}
         <div
           className={`
-            absolute top-0 right-0 px-4 py-2 font-tech text-sm font-bold
-            skew-x-[-10deg] translate-x-2 -translate-y-1
-            ${
-              isUpcoming
-                ? "bg-ers-yellow text-black"
-                : "bg-gray-700 text-gray-300"
+            absolute top-3 right-0 px-4 py-2 font-tech text-sm font-bold z-20
+            skew-x-[-10deg] translate-x-2
+            ${isUpcoming
+              ? "bg-ers-yellow text-black"
+              : "bg-gray-700 text-gray-300"
             }
           `}
         >
@@ -155,11 +165,11 @@ function EventCard({
       </div>
 
       {/* CONTENT */}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-6 flex flex-col flex-grow relative z-20">
         <h3
           className={`
-            text-2xl font-tech mb-3
-            ${isUpcoming ? "text-white" : "text-gray-400"}
+            text-2xl font-tech mb-3 transition-colors duration-300
+            ${isUpcoming ? "text-white group-hover:text-ers-yellow" : "text-gray-400"}
           `}
         >
           {event.title}
@@ -170,14 +180,14 @@ function EventCard({
         </p>
 
         {/* FOOTER */}
-        <div className="mt-auto flex items-center justify-between text-sm border-t border-white/10 pt-4">
+        <div className="mt-auto flex items-center justify-between text-sm border-t border-white/10 pt-4 group-hover:border-ers-yellow/30 transition-colors">
           <div className="flex items-center gap-2 text-gray-500">
-            <Clock size={16} className="text-ers-yellow" />
+            <Clock size={16} className={isUpcoming ? "text-ers-yellow" : "text-gray-600"} />
             <span>{formattedTime}</span>
           </div>
 
           {isUpcoming ? (
-            <div className="flex items-center gap-2 text-ers-yellow group-hover:translate-x-1 transition-transform">
+            <div className="flex items-center gap-2 text-ers-yellow group-hover:translate-x-1 transition-transform font-bold">
               DETAILS <ArrowRight size={16} />
             </div>
           ) : (

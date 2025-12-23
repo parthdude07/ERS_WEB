@@ -20,7 +20,7 @@ function NavBar() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="bg-black border-b-4 border-ers-yellow shadow-[0_8px_0_0_#f4c430]">
+      <div className="bg-black/90 backdrop-blur-md border-b-4 border-ers-yellow">
         <nav className="flex w-full items-center justify-between px-6 py-4 uppercase font-tech text-sm tracking-[0.2em]">
 
           {/* LOGO */}
@@ -33,12 +33,13 @@ function NavBar() {
                   text-3xl
                   md:text-4xl
                   ${logoFont.className}
+                  transition-transform duration-300 hover:scale-105
                 `}
               >
                 ERS
               </div>
 
-              <span className="text-ers-yellow/80 font-body text-[10px] md:text-xs mt-1 tracking-widest">
+              <span className="text-ers-yellow/80 font-body text-[10px] md:text-xs mt-1 tracking-widest whitespace-nowrap">
                 Electronics & Robotics Society
               </span>
             </div>
@@ -46,7 +47,7 @@ function NavBar() {
 
 
           {/* DESKTOP NAV */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
 
@@ -55,16 +56,12 @@ function NavBar() {
                   key={link.href}
                   href={link.href}
                   className={`
-                    relative transition-colors
-                    ${isActive ? "text-ers-yellow" : "text-white hover:text-ers-yellow"}
+                    nav-link
+                    relative transition-colors duration-300
+                    ${isActive ? "active" : "text-white/80"}
                   `}
                 >
                   {link.name}
-
-                  {/* ACTIVE UNDERLINE */}
-                  {isActive && (
-                    <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-ers-yellow" />
-                  )}
                 </Link>
               );
             })}
@@ -72,17 +69,17 @@ function NavBar() {
 
           {/* MOBILE MENU BUTTON */}
           <button
-            className="md:hidden text-ers-yellow"
+            className="md:hidden text-ers-yellow transition-transform hover:scale-110 active:scale-95"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
-            {open ? <X size={26} /> : <Menu size={26} />}
+            {open ? <X size={28} /> : <Menu size={28} />}
           </button>
         </nav>
 
         {/* MOBILE MENU */}
         {open && (
-          <div className="md:hidden border-t border-ers-yellow/30 bg-black">
+          <div className="md:hidden border-t border-ers-yellow/30 bg-black/95 backdrop-blur-xl animate-slide-down">
             <div className="flex flex-col px-6 py-6 gap-4">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
@@ -93,10 +90,10 @@ function NavBar() {
                     href={link.href}
                     onClick={() => setOpen(false)}
                     className={`
-                      py-2 transition-colors
+                      py-2 transition-all duration-200
                       ${isActive
-                        ? "text-ers-yellow"
-                        : "text-white hover:text-ers-yellow"}
+                        ? "text-ers-yellow translate-x-2"
+                        : "text-white hover:text-ers-yellow hover:translate-x-2"}
                     `}
                   >
                     {link.name}

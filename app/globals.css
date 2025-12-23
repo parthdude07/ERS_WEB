@@ -7,7 +7,8 @@
   --color-surface: #0a0a0f;
   --color-foreground: #e0e0e0;
   --color-heading: #ffffff;
-  --color-accent: #f4c430; /* cyber yellow / gold */
+  --color-accent: #f4c430;
+  /* cyber yellow / gold */
   --color-accent-strong: #ffd700;
   --color-circuit: rgba(244, 196, 48, 0.18);
   --color-border: #f4c430;
@@ -24,6 +25,47 @@
 
   /* Fonts come ONLY from next/font */
   --font-sans: var(--font-body);
+
+  /* Animation Hooks */
+  --animate-fade-in: fadeIn 0.5s ease-out forwards;
+  --animate-slide-down: slideDown 0.3s ease-out forwards;
+  --animate-pulse-slow: pulseSlow 3s infinite;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseSlow {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+  }
 }
 
 /* ================= RESET ================= */
@@ -33,6 +75,25 @@
   box-sizing: border-box;
 }
 
+/* ================= SCROLLBAR ================= */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 5px;
+  border: 2px solid var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
 /* ================= BASE TYPOGRAPHY ================= */
 body {
   min-height: 100vh;
@@ -40,6 +101,8 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   line-height: 1.6;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll on mobile */
 }
 
 /* Headings */
@@ -70,7 +133,7 @@ h6 {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* ================= BACKGROUNDS ================= */
+/* ================= BACKGROUNDS & EFFECTS ================= */
 .circuit-bg {
   background-color: var(--color-bg);
   background-image:
@@ -82,15 +145,20 @@ h6 {
   background-blend-mode: screen;
 }
 
+.glass-panel {
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(244, 196, 48, 0.15);
+}
+
 /* ================= ACCENTS ================= */
 .barcode-stripe {
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--color-accent) 0,
-    var(--color-accent) 6px,
-    transparent 6px,
-    transparent 12px
-  );
+  background-image: repeating-linear-gradient(90deg,
+      var(--color-accent) 0,
+      var(--color-accent) 6px,
+      transparent 6px,
+      transparent 12px);
 }
 
 /* Angular / chamfered utilities */
@@ -104,28 +172,15 @@ h6 {
   padding: 0.35rem 0;
   color: var(--color-heading);
   text-decoration: none;
-  transition: color 180ms ease;
+  transition: all 0.3s ease;
 }
 
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 3px;
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 180ms ease;
-}
-
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
   color: var(--color-accent);
-}
-
-.nav-link:hover::after {
-  transform: scaleX(1);
+  text-shadow:
+    0 0 10px rgba(244, 196, 48, 0.6),
+    0 0 20px rgba(244, 196, 48, 0.3);
 }
 
 /* ================= BUTTONS ================= */
@@ -143,10 +198,10 @@ h6 {
   border: 2px solid var(--color-border);
   clip-path: polygon(10% 0, 100% 0, 100% 78%, 90% 100%, 0 100%, 0 22%);
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease;
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease,
+    color 200ms ease;
 }
 
 .btn-primary {
@@ -157,7 +212,7 @@ h6 {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 22px 0 rgba(244, 196, 48, 0.35);
+  box-shadow: 0 4px 20px rgba(244, 196, 48, 0.4);
   background: var(--color-accent-strong);
 }
 
@@ -170,4 +225,16 @@ h6 {
   background: rgba(244, 196, 48, 0.1);
   transform: translateY(-2px);
   box-shadow: 0 0 18px 0 rgba(244, 196, 48, 0.15);
+}
+
+/* ================= UTILITY ANIMATIONS ================= */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
