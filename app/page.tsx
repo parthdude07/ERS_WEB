@@ -76,7 +76,7 @@ export default async function Home() {
       </section>
 
       {/* ================= GALLERY SECTION ================= */}
-      <section className="px-4 md:px-8 py-24 max-w-8xl mx-auto">
+      <section className="px-6 md:px-24 py-24">
         {/* Title */}
         <div className="flex flex-col items-center mb-16">
           <h2 className="text-center font-tech text-4xl md:text-6xl tracking-widest text-ers-yellow drop-shadow-[0_0_10px_rgba(244,196,48,0.3)]">

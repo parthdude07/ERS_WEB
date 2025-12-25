@@ -20,7 +20,7 @@ async function getEvent(slug: string) {
     button1,
     button2
   }`;
-  
+
   const event = await client.fetch(query, { slug });
   return event;
 }
@@ -47,7 +47,7 @@ export default async function EventPage({ params }: EventPageProps) {
 
   return (
     <main className="min-h-screen bg-ers-black text-white font-body selection:bg-ers-yellow selection:text-black">
-      
+
       {/* HERO SECTION */}
       <div className="relative h-[50vh] w-full overflow-hidden border-b border-ers-yellow/30">
         {event.coverImage ? (
@@ -63,20 +63,20 @@ export default async function EventPage({ params }: EventPageProps) {
             <span className="text-gray-600 font-tech text-2xl">NO SIGNAL</span>
           </div>
         )}
-        
+
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-ers-black via-ers-black/50 to-transparent" />
 
         {/* Content Container */}
         <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 max-w-7xl mx-auto">
-          <Link 
-            href="/events" 
+          <Link
+            href="/events"
             className="inline-flex items-center gap-2 text-ers-yellow hover:text-white transition-colors mb-6 font-mono text-sm"
           >
             <ArrowLeft size={16} /> BACK TO LOGS
           </Link>
 
-          <h1 className="text-4xl md:text-6xl font-tech font-bold text-white mb-4 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-tech font-bold text-white mb-4 leading-tight animate-fade-in opacity-0 [animation-delay:100ms]">
             {event.title}
           </h1>
 
@@ -94,13 +94,13 @@ export default async function EventPage({ params }: EventPageProps) {
       </div>
 
       {/* DETAILS SECTION */}
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        
+      <div className="max-w-4xl mx-auto px-6 py-16 animate-fade-in opacity-0 [animation-delay:300ms]">
+
         {/* ACTION BUTTONS */}
         {(event.button1 || event.button2) && (
           <div className="flex flex-wrap gap-4 mb-12">
             {event.button1?.url && (
-              <a 
+              <a
                 href={event.button1.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -110,7 +110,7 @@ export default async function EventPage({ params }: EventPageProps) {
               </a>
             )}
             {event.button2?.url && (
-              <a 
+              <a
                 href={event.button2.url}
                 target="_blank"
                 rel="noopener noreferrer"

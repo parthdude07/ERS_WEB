@@ -40,12 +40,12 @@ export default async function TeamPage() {
     <main className="min-h-screen bg-ers-black text-white px-6 md:px-24 py-24 font-body">
 
       {/* PAGE TITLE */}
-      <h1 className="text-5xl md:text-6xl font-tech text-ers-yellow text-center mb-24 tracking-widest">
+      <h1 className="text-5xl md:text-6xl font-tech text-ers-yellow text-center mb-24 tracking-widest animate-fade-in opacity-0 [animation-delay:100ms]">
         OUR TEAM
       </h1>
 
       {/* ================= FACULTY IN-CHARGE ================= */}
-      <section className="mb-32">
+      <section className="mb-32 animate-fade-in opacity-0 [animation-delay:300ms]">
         <h2 className="text-3xl font-tech mb-14 border-l-4 border-ers-yellow pl-4">
           FACULTY IN-CHARGE
         </h2>
@@ -65,7 +65,7 @@ export default async function TeamPage() {
 
 
       {/* ================= COORDINATORS ================= */}
-      <section className="mb-32">
+      <section className="mb-32 animate-fade-in opacity-0 [animation-delay:500ms]">
         <h2 className="text-3xl font-tech mb-14 border-l-4 border-white pl-4">
           COORDINATORS
         </h2>
@@ -85,7 +85,7 @@ export default async function TeamPage() {
       </section>
 
       {/* ================= CORE MEMBERS ================= */}
-      <section>
+      <section className="animate-fade-in opacity-0 [animation-delay:700ms]">
         <h2 className="text-2xl font-tech mb-12 text-gray-400">
           CORE MEMBERS
         </h2>

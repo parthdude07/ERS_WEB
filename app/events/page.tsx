@@ -41,7 +41,7 @@ export default async function EventsPage() {
     <div className="min-h-screen bg-ers-black text-white p-8 md:p-24 font-body">
 
       {/* Header */}
-      <div className="flex flex-col items-center mb-16 text-center">
+      <div className="flex flex-col items-center mb-16 text-center animate-fade-in opacity-0 [animation-delay:100ms]">
         <h1 className="text-5xl md:text-7xl font-tech text-transparent bg-clip-text bg-gradient-to-r from-ers-yellow to-white mb-4">
           CLUB EVENTS
         </h1>
@@ -50,7 +50,7 @@ export default async function EventsPage() {
 
       {/* --- UPCOMING EVENTS SECTION --- */}
       {upcomingEvents.length > 0 && (
-        <section className="mb-24">
+        <section className="mb-24 animate-fade-in opacity-0 [animation-delay:300ms]">
           <div className="flex items-center gap-4 mb-10">
             <div className="w-3 h-8 bg-ers-yellow" />
             <h2 className="text-3xl md:text-4xl font-tech tracking-wide text-white">
@@ -67,7 +67,7 @@ export default async function EventsPage() {
       )}
 
       {/* --- PAST EVENTS SECTION --- */}
-      <section>
+      <section className="animate-fade-in opacity-0 [animation-delay:500ms]">
         <div className="flex items-center gap-4 mb-10">
           <div className="w-3 h-8 bg-gray-600" />
           <h2 className="text-3xl md:text-4xl font-tech tracking-wide text-gray-400">

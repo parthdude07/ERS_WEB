@@ -13,14 +13,14 @@ export default async function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-ers-black text-white p-6 md:p-20 font-body">
-      <div className="text-center mb-16">
+      <div className="text-center mb-16 animate-fade-in opacity-0 [animation-delay:100ms]">
         <h1 className="text-5xl md:text-7xl font-tech text-transparent bg-clip-text bg-gradient-to-r from-ers-yellow to-white mb-4">
           PROJECT LABS
         </h1>
         <p className="text-gray-400 font-mono text-sm tracking-widest">// INNOVATION_STATUS: ACTIVE</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto animate-fade-in opacity-0 [animation-delay:300ms]">
         {projects.map((proj) => (
           <div key={proj._id} className="group relative bg-black border border-ers-yellow/40 hover:border-ers-yellow transition-all duration-300 flex flex-col h-full hover:shadow-[0_0_20px_rgba(244,196,48,0.15)] hover:-translate-y-2 overflow-hidden">
 
