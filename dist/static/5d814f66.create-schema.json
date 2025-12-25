@@ -1,0 +1,620 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Faculty In-Charge (FIC)",
+              "value": "FIC"
+            },
+            {
+              "title": "Coordinator",
+              "value": "Coordinator"
+            },
+            {
+              "title": "Co-Coordinator",
+              "value": "Co-Coordinator"
+            },
+            {
+              "title": "Member",
+              "value": "Member"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "FIC",
+                  "Coordinator",
+                  "Co-Coordinator",
+                  "Member"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "role",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "photo",
+        "type": "image",
+        "title": "Profile Photo"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "linkedin",
+        "type": "url",
+        "title": "LinkedIn URL"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "github",
+        "type": "url",
+        "title": "GitHub URL"
+      }
+    ],
+    "name": "teamMember",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Event Title"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "date",
+        "type": "datetime",
+        "title": "Event Date"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "coverImage",
+        "type": "image",
+        "title": "Cover Poster"
+      },
+      {
+        "rows": 4,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "type": "image"
+          }
+        ],
+        "name": "gallery",
+        "type": "array",
+        "title": "Event Gallery"
+      },
+      {
+        "fields": [
+          {
+            "name": "label",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/",
+                          "/^mailto$/",
+                          "/^tel$/"
+                        ],
+                        "allowRelative": true,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "url",
+            "type": "url",
+            "title": "URL"
+          }
+        ],
+        "name": "button1",
+        "type": "object"
+      },
+      {
+        "fields": [
+          {
+            "name": "label",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/",
+                          "/^mailto$/",
+                          "/^tel$/"
+                        ],
+                        "allowRelative": true,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "url",
+            "type": "url",
+            "title": "URL"
+          }
+        ],
+        "name": "button2",
+        "type": "object"
+      }
+    ],
+    "name": "event",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 80
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "e.g., \"Orientation 2025\" or \"Random Clicks\"",
+        "name": "title",
+        "type": "string",
+        "title": "Collection Title"
+      },
+      {
+        "options": {
+          "layout": "grid"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "max",
+                "constraint": 40
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image",
+            "name": "photo"
+          }
+        ],
+        "name": "images",
+        "type": "array",
+        "title": "Photos"
+      }
+    ],
+    "name": "gallery",
+    "type": "document",
+    "title": "Gallery Uploads"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Project Title"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "title": "Short Description"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Project Image"
+      },
+      {
+        "options": {
+          "layout": "tags"
+        },
+        "description": "Press Enter after typing a tech (e.g. \"Arduino\", \"IoT\")",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "techStack",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "githubLink",
+        "type": "url",
+        "title": "GitHub/Demo Link"
+      },
+      {
+        "options": {
+          "list": [
+            "Completed",
+            "In Progress",
+            "Prototype"
+          ]
+        },
+        "name": "status",
+        "type": "string"
+      }
+    ],
+    "name": "project",
+    "type": "document",
+    "title": "Projects"
+  },
+  {
+    "fields": [
+      {
+        "description": "e.g. 1st Place in RoboWars",
+        "name": "title",
+        "type": "string",
+        "title": "Achievement Title"
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "title": "Event/Competition Name"
+      },
+      {
+        "name": "date",
+        "type": "date"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Award/Team Photo"
+      },
+      {
+        "name": "teamMembers",
+        "type": "string",
+        "title": "Team Members Involved"
+      }
+    ],
+    "name": "achievement",
+    "type": "document",
+    "title": "Achievements"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Popup Title"
+      },
+      {
+        "rows": 3,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The popup will be visible until one day after this date.",
+        "name": "date",
+        "type": "datetime",
+        "title": "Event Date"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Popup Image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/",
+                      "/^mailto$/",
+                      "/^tel$/"
+                    ],
+                    "allowRelative": true,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Optional link where the popup should redirect to.",
+        "name": "link",
+        "type": "url",
+        "title": "Link URL"
+      },
+      {
+        "initialValue": true,
+        "description": "Manually control visibility. If false, it will not show regardless of date.",
+        "name": "isActive",
+        "type": "boolean"
+      },
+      {
+        "fields": [
+          {
+            "name": "label",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/",
+                          "/^mailto$/",
+                          "/^tel$/"
+                        ],
+                        "allowRelative": true,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "url",
+            "type": "url",
+            "title": "URL"
+          }
+        ],
+        "name": "button1",
+        "type": "object"
+      },
+      {
+        "fields": [
+          {
+            "name": "label",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/",
+                          "/^mailto$/",
+                          "/^tel$/"
+                        ],
+                        "allowRelative": true,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "url",
+            "type": "url",
+            "title": "URL"
+          }
+        ],
+        "name": "button2",
+        "type": "object"
+      }
+    ],
+    "name": "popup",
+    "type": "document",
+    "title": "Popup Notification"
+  }
+]
