@@ -7,7 +7,9 @@ interface Member {
   name: string;
   role: string;
   photo?: any;
+  linkedin?: string;
 }
+
 
 // ================= DATA FETCH =================
 async function getTeam(): Promise<Member[]> {
@@ -16,11 +18,13 @@ async function getTeam(): Promise<Member[]> {
       _id,
       name,
       role,
-      photo
+      photo,
+      linkedin
     } | order(name asc)
   `;
   return await client.fetch(query);
 }
+
 
 // ================= PAGE =================
 export default async function TeamPage() {
@@ -53,6 +57,7 @@ export default async function TeamPage() {
               name={fic.name}
               role="Faculty In-Charge"
               imageUrl={fic.photo && urlFor(fic.photo).width(600).url()}
+              linkedin={fic.linkedin}
             />
           ))}
         </div>
@@ -72,7 +77,9 @@ export default async function TeamPage() {
               name={coord.name}
               role={coord.role}
               imageUrl={coord.photo && urlFor(coord.photo).width(500).url()}
+              linkedin={coord.linkedin}
             />
+
           ))}
         </div>
       </section>
@@ -90,7 +97,9 @@ export default async function TeamPage() {
               name={mem.name}
               role={mem.role}
               imageUrl={mem.photo && urlFor(mem.photo).width(400).url()}
+              linkedin={mem.linkedin}
             />
+
           ))}
         </div>
       </section>
