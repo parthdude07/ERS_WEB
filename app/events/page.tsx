@@ -106,11 +106,11 @@ function EventCard({
     minute: "2-digit",
   });
 
-  return (
+  const CardContent = (
     <div
       className={`
         group relative flex flex-col bg-black overflow-hidden
-        border transition-all duration-300
+        border transition-all duration-300 h-full
         ${isUpcoming
           ? "border-ers-yellow/40 hover:border-ers-yellow hover:shadow-[0_0_20px_rgba(244,196,48,0.15)] hover:-translate-y-2"
           : "border-white/10 hover:border-white/30 hover:-translate-y-1"
@@ -199,4 +199,14 @@ function EventCard({
       </div>
     </div>
   );
+
+  if (event.slug?.current) {
+    return (
+      <Link href={`/events/${event.slug.current}`} className="block h-full">
+        {CardContent}
+      </Link>
+    );
+  }
+
+  return CardContent;
 }

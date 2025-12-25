@@ -8,6 +8,7 @@ import event from './event'
 import gallery from './gallery'
 import project from './project'
 import achievement from './achievement'
+import popup from './popup'
 // (Optional) Keep these if you still want the default blog features, otherwise remove them
 // import {categoryType} from './categoryType'
 // import {postType} from './postType'
@@ -22,6 +23,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     gallery,
     project,
     achievement,
+    popup,
     // categoryType, 
     // postType, 
     // authorType
