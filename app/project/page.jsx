@@ -1,11 +1,13 @@
 import { client, urlFor } from '@/sanity/lib/sanity';
+import { sanityFetch } from '@/sanity/lib/live';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Cpu, Github, ExternalLink, Terminal } from 'lucide-react';
 
 async function getProjects() {
   const query = `*[_type == "project"] | order(_createdAt desc)`;
-  return await client.fetch(query, {}, { next: { revalidate: 10 } });
+  const { data } = await sanityFetch({ query });
+  return data;
 }
 
 export default async function ProjectsPage() {

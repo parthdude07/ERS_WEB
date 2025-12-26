@@ -1,6 +1,7 @@
 import Link from "next/link";
 import HeroRobot from "@/components/HeroRobot";
-import { client, urlFor } from "@/sanity/lib/sanity";
+import { urlFor } from "@/sanity/lib/sanity";
+import { sanityFetch } from "@/sanity/lib/live";
 import Image from "next/image";
 
 async function getGalleryImages() {
@@ -9,7 +10,7 @@ async function getGalleryImages() {
       images
     }
   `;
-  const collections = await client.fetch(query);
+  const { data: collections } = await sanityFetch({ query });
   return collections.flatMap((c: any) => c.images || []);
 }
 

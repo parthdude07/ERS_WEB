@@ -1,4 +1,5 @@
 import { client, urlFor } from '@/sanity/lib/sanity';
+import { sanityFetch } from '@/sanity/lib/live';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Clock, MapPin, ArrowRight } from 'lucide-react';
@@ -24,7 +25,8 @@ async function getEvents() {
     coverImage,
     description
   }`;
-  return await client.fetch(query);
+  const { data } = await sanityFetch({ query });
+  return data;
 }
 
 export default async function EventsPage() {

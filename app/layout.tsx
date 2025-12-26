@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer";
 import PopupNotification from "@/components/PopupNotification";
 import { client } from "@/sanity/lib/sanity";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 const display = Orbitron({
   variable: "--font-display",
@@ -40,7 +41,8 @@ async function getPopup() {
     button1,
     button2
   }`;
-  return await client.fetch(query);
+  const { data } = await sanityFetch({ query });
+  return data;
 }
 
 export default async function RootLayout({
@@ -57,7 +59,8 @@ export default async function RootLayout({
       >
         <Navbar />
         <PopupNotification popup={popup} />
-        {children}
+        {SanityLive />
+        <children}
         <Footer />
       </body>
     </html>
